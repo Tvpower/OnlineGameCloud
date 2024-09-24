@@ -1,0 +1,9 @@
+# ninja log v6
+4	373	7485895194151385	Emulator_autogen/timestamp	d20633247956be0b
+4	373	7485895194151385	Emulator_autogen/mocs_compilation.cpp	d20633247956be0b
+4	373	7485895194151385	C:/Users/jarqu/OneDrive/Desktop/Emulator/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Emulator_autogen/timestamp	d20633247956be0b
+4	373	7485895194151385	C:/Users/jarqu/OneDrive/Desktop/Emulator/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Emulator_autogen/mocs_compilation.cpp	d20633247956be0b
+379	1399	7485895194605931	CMakeFiles/Emulator.dir/mainwindow.cpp.obj	a26f8382228c9b18
+377	1400	7485895194591529	CMakeFiles/Emulator.dir/main.cpp.obj	8f8dfc02b160a984
+376	1410	7485895194571532	CMakeFiles/Emulator.dir/Emulator_autogen/mocs_compilation.cpp.obj	c107187516b51fd2
+1410	1535	7485895204916412	Emulator.exe	5b4237e0f2dffb20
