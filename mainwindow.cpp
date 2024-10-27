@@ -3,10 +3,24 @@
 #include <QVBoxLayout>
 #include <QDebug>
 #include <QWidget>
+#include <QLabel>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
+
+    // Set default window size
+    resize(800, 450);
+
+
+    // Title
+    QLabel *titleLabel = new QLabel("<h1>Online Game Cloud</h1>");
+    titleLabel->setAlignment(Qt::AlignCenter);
+
+    // Instructions
+    QLabel *instructions = new QLabel("<h3>Choose An Emulator To Begin!</h3>");
+    instructions->setAlignment(Qt::AlignCenter);
+
     // Create the buttons
     emulatorBtn1 = new QPushButton("Choose Emulator 1", this);
     emulatorBtn2 = new QPushButton("Choose Emulator 2", this);
@@ -21,6 +35,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Set up a vertical layout
     QVBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget(titleLabel);
+    layout->addWidget(instructions);
     layout->addWidget(emulatorBtn1);
     layout->addWidget(emulatorBtn2);
 
