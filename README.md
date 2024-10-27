@@ -7,7 +7,6 @@
 | Raul Jarquin Valdez   | [GitHub]()    | [Raul Jarquin Valdez]()   |
 | Ethan Pang    | [GitHub]() | [Ethan Pang]()  |
 | Guido Asbun | [GitHub]() | [Guido Asbun]() |
-| Bryan Corona | [GitHub]() | [Bryan Corona]() |
 | Mario Pinzon | [GitHub]() | [Mario Pinzon]() |
 
 ### Description
