@@ -17,7 +17,7 @@ add_executable(untitled9 WIN32
         main.cpp
         MainWindow.cpp
         MainWindow.h
-        )
+        components/emulatorwindow/EmulatorWindow.cpp components/emulatorwindow/EmulatorWindow.h)
 
 target_link_libraries(untitled9
         Qt6::Core

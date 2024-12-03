@@ -1,10 +1,13 @@
 #include "mainwindow.h"
+#include "components/emulatorwindow/EmulatorWindow.h"
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QDebug>
 #include <QWidget>
 #include <QLabel>
 #include <QMessageBox>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -15,6 +18,12 @@ MainWindow::MainWindow(QWidget *parent)
     resize(800, 450);
 
     m_socket = new QTcpSocket(this);
+
+    // Add these connection lines
+    connect(m_socket, &QTcpSocket::readyRead, this, &MainWindow::handleServerResponse);
+    connect(m_socket, &QTcpSocket::errorOccurred, this, &MainWindow::handleSocketError);
+
+
     // Title
     QLabel *titleLabel = new QLabel("<h1>Online Game Cloud</h1>");
     titleLabel->setAlignment(Qt::AlignCenter);
@@ -57,8 +66,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::connectToServer()
 {
-    QString serverAddress = "20.150.209.32";
-    quint16 serverPort = 3389;
+    QString serverAddress = "20.150.209.32";  // Your Azure VM IP
+    quint16 serverPort = 12345;  // Match the server port
 
     // Disconnect if already connected
     if (m_socket->state() != QAbstractSocket::UnconnectedState) {
@@ -75,7 +84,6 @@ void MainWindow::connectToServer()
         qDebug() << "Connected to server successfully!";
     } else {
         qDebug() << "Could not connect to server";
-        qDebug() << "Error:" << m_socket->errorString();
         QMessageBox::warning(this, "Connection Failed",
                              "Could not connect to server: " + m_socket->errorString());
     }
@@ -90,11 +98,29 @@ void MainWindow::handleSocketError(QAbstractSocket::SocketError error)
 void MainWindow::handleServerResponse()
 {
     QByteArray data = m_socket->readAll();
-    qDebug() << "Received from server:" << data;
+    qDebug() << "Raw server response:" << data;
 
-    // Handle the server's response here
-    // You might want to show a message to the user or take some action
-    // based on what the server sends back
+    QJsonDocument doc = QJsonDocument::fromJson(data);
+    if (doc.isNull()) {
+        qDebug() << "Failed to parse JSON response";
+        QMessageBox::warning(this, "Error", "Invalid response from server");
+        return;
+    }
+
+    QJsonObject response = doc.object();
+    qDebug() << "Parsed response:" << response;
+
+    if (response["status"].toString() == "success") {
+        qDebug() << "Success response received";
+        EmulatorWindow* emulatorWindow = new EmulatorWindow(m_socket->peerAddress().toString(), this);
+        emulatorWindow->setAttribute(Qt::WA_DeleteOnClose);
+        emulatorWindow->show();
+    } else {
+        QString errorMsg = response["message"].toString();
+        qDebug() << "Error response received:" << errorMsg;
+        QMessageBox::warning(this, "Error",
+                             "Failed to launch emulator: " + errorMsg);
+    }
 }
 
 void MainWindow::chooseEmulator1()
