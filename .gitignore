@@ -1,0 +1,32 @@
+# Build directories
+/build/
+/cmake-build-*/
+/Desktop_Qt*/
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+*.cmake
+!CMakeLists.txt
+!qtcsettings.cmake
+
+# Compiled files
+*.exe
+*.dll
+*.so
+*.dylib
+*.o
+*.obj
+
+# Qt specific
+*.user
+moc_*.cpp
+ui_*.h
+
+# Ninja build system
+.ninja_deps
+.ninja_log
+
+# IDE specific
+.idea/
+.vs/
